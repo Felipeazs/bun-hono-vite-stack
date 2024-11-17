@@ -1,7 +1,7 @@
 import { OpenAPIHono } from "@hono/zod-openapi"
 import defaultHook from "stoker/openapi/default-hook"
-import { AppBindings } from "./types"
 import { logger } from "../middlewares/pino"
+import { AppBindings } from "./types"
 
 export function createRouter() {
 	return new OpenAPIHono<AppBindings>({ strict: false, defaultHook })
