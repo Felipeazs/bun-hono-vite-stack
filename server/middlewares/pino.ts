@@ -4,7 +4,15 @@ import { pinoLogger } from "hono-pino"
 export function logger() {
 	if (env.NODE_ENV === "production") {
 		return pinoLogger({
-			pino: { level: "info" },
+			pino: {
+				transport: {
+					target: "pino-pretty",
+					options: {
+						colorize: true,
+					},
+				},
+				level: "info",
+			},
 		})
 	}
 

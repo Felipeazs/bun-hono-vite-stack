@@ -26,6 +26,7 @@ if (!isProd) {
 }
 
 app.use("/assets/*", serveStatic({ root: isProd ? "build/" : "./" }))
+app.use("/vite.svg", serveStatic({ root: isProd ? "build/" : "./vite.svg" }))
 app.get("/*", (c) => c.html(html))
 
 export default {
