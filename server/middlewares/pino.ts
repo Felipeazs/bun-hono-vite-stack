@@ -2,20 +2,6 @@ import env from "@/env"
 import { pinoLogger } from "hono-pino"
 
 export function logger() {
-	if (env.NODE_ENV === "production") {
-		return pinoLogger({
-			pino: {
-				transport: {
-					target: "pino-pretty",
-					options: {
-						colorize: true,
-					},
-				},
-				level: "info",
-			},
-		})
-	}
-
 	return pinoLogger({
 		pino: {
 			transport: {
