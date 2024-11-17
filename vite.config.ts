@@ -26,7 +26,7 @@ export default defineConfig({
 				/^\/(public|assets|static)\/.+/,
 				/^\/node_modules\/.*/,
 			],
-			injectClientScript: false,
+			injectClientScript: true,
 		}),
 	],
 	resolve: {
