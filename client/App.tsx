@@ -5,6 +5,7 @@ import reactLogo from "./assets/react.svg"
 import viteLogo from "/vite.svg"
 
 import { getPosts } from "@/api"
+import { Button } from "./components/ui/button"
 
 function App() {
 	const [recall, setRecall] = useState<boolean>(true)
@@ -47,9 +48,13 @@ function App() {
 				{isFetching ? (
 					<p>API calling...</p>
 				) : (
-					<p>Respuesta: {posts?.map((p) => <span key={p.id}>{p.post}</span>)} </p>
+					<p>Respuesta: {posts?.map((p) => <span key={p.id}>{p.post}</span>)}</p>
 				)}
-				<button onClick={() => setRecall(true)}>Recall</button>
+				<Button
+					variant="outline"
+					onClick={() => setRecall(true)}>
+					Recall
+				</Button>
 			</div>
 			<p className="read-the-docs">Click on the Vite and React logos to learn more</p>
 		</>
