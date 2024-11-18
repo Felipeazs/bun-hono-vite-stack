@@ -16,6 +16,7 @@
 		"@hono/zod-openapi": "^0.17.1",
 		"@scalar/hono-api-reference": "^0.5.159",
 		"drizzle-orm": "^0.36.3",
+		"drizzle-zod": "^0.5.1",
 		"hono": "^4.6.10",
 		"hono-pino": "^0.6.0",
 		"pino": "^9.5.0",

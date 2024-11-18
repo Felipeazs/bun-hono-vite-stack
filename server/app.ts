@@ -40,7 +40,7 @@ app.use("/assets/*", serveStatic({ root: isProd ? "build/" : "./" }))
 app.use("/vite.svg", serveStatic({ root: isProd ? "build/" : "./vite.svg" }))
 app.get("/*", (c) => c.html(html))
 
-export type ApiRoutes = (typeof routes)[number]
+export type ApiRoutes = typeof routes[number]
 
 export default {
 	port: env.PORT || 4000,
