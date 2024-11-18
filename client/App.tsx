@@ -7,7 +7,6 @@ import viteLogo from "/vite.svg"
 import { getPosts } from "@/api"
 
 function App() {
-	const [count, setCount] = useState(0)
 	const [recall, setRecall] = useState<boolean>(true)
 
 	const { data: posts, isFetching } = useQuery({
@@ -23,7 +22,7 @@ function App() {
 
 	return (
 		<>
-			<div>
+			<div className="flex justify-center gap-10">
 				<a
 					href="https://vite.dev"
 					target="_blank">
@@ -45,7 +44,6 @@ function App() {
 			</div>
 			<h1>Vite + React</h1>
 			<div className="card">
-				<button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
 				{isFetching ? (
 					<p>API calling...</p>
 				) : (
