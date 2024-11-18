@@ -7,7 +7,7 @@ const client = hc<ApiRoutes>("/api", {
 	},
 })
 
-export const sendEmailContacto = async () => {
+export const getPosts = async () => {
 	return await client.posts
 		.$get()
 		.then((res) => res.json())

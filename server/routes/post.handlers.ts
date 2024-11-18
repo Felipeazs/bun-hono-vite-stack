@@ -2,6 +2,8 @@ import { AppRouteHandler } from "../lib/types"
 import { TPostRoute } from "./post.routes"
 
 export const getposts: AppRouteHandler<TPostRoute> = async (c) => {
+	await new Promise((r) => setTimeout(r, 2000))
+
 	const posts = [
 		{
 			id: 1,
