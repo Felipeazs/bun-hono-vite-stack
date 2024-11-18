@@ -1,16 +1,24 @@
+import { useQuery } from "@tanstack/react-query"
 import { useState } from "react"
 import "./App.css"
 import reactLogo from "./assets/react.svg"
 import viteLogo from "/vite.svg"
-import { useQuery } from "@tanstack/react-query"
+
 import { getPosts } from "@/api"
 
 function App() {
 	const [count, setCount] = useState(0)
+	const [recall, setRecall] = useState<boolean>(true)
 
-	const { data: posts, isLoading } = useQuery({
+	const { data: posts, isFetching } = useQuery({
 		queryKey: ["posts"],
-		queryFn: getPosts,
+		queryFn: async () => {
+			const res = await getPosts()
+			setRecall(false)
+
+			return res
+		},
+		enabled: recall,
 	})
 
 	return (
@@ -38,11 +46,12 @@ function App() {
 			<h1>Vite + React</h1>
 			<div className="card">
 				<button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-				{isLoading ? (
+				{isFetching ? (
 					<p>API calling...</p>
 				) : (
-					<p>Respuesta: {posts?.map((p) => <span>{p.post}</span>)} </p>
+					<p>Respuesta: {posts?.map((p) => <span key={p.id}>{p.post}</span>)} </p>
 				)}
+				<button onClick={() => setRecall(true)}>Recall</button>
 			</div>
 			<p className="read-the-docs">Click on the Vite and React logos to learn more</p>
 		</>
