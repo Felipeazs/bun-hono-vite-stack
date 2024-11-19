@@ -25,17 +25,21 @@ const Posts = () => {
 			) : (
 				<div>
 					Respuesta:
-					<Table className="text-center">
+					<Table className="">
 						<TableHeader>
 							<TableRow>
+								<TableHead>id</TableHead>
 								<TableHead>Posts</TableHead>
+								<TableHead>Created at</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
 							{data?.posts.length ? (
 								data.posts.map((p) => (
-									<TableRow>
-										<TableCell key={p.id}> {p.post}</TableCell>
+									<TableRow key={p.id}>
+										<TableCell>{p.id}</TableCell>
+										<TableCell>{p.post}</TableCell>
+										<TableCell>{p.createdAt?.substring(0, 10)}</TableCell>
 									</TableRow>
 								))
 							) : (
