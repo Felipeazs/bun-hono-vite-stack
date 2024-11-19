@@ -18,6 +18,7 @@ const Posts = () => {
 		},
 		enabled: recall,
 	})
+
 	return (
 		<div className="flex flex-col gap-5">
 			{isFetching ? (
@@ -34,7 +35,7 @@ const Posts = () => {
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{data?.posts.length ? (
+							{data?.posts?.length ? (
 								data.posts.map((p) => (
 									<TableRow key={p.id}>
 										<TableCell>{p.id}</TableCell>

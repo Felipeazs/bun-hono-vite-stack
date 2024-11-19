@@ -1,5 +1,4 @@
 import * as HttpStatusCode from "stoker/http-status-codes"
-import * as HttpStatusPhrases from "stoker/http-status-phrases"
 
 import db from "../db"
 import { post } from "../db/schema"
@@ -12,9 +11,9 @@ export const getPosts: AppRouteHandler<TGetPostRoute> = async (c) => {
 	await new Promise((r) => setTimeout(r, 2000))
 
 	const posts = await db.query.post.findMany()
-	if (!posts) c.json({ message: HttpStatusPhrases.NOT_FOUND }, HttpStatusCode.NOT_FOUND)
+	if (!posts) return c.json({ posts: null, status: HttpStatusCode.NOT_FOUND })
 
-	return c.json({ posts }, HttpStatusCode.OK)
+	return c.json({ posts, status: HttpStatusCode.OK })
 }
 
 export const createPost: AppRouteHandler<TCreatePostRoute> = async (c) => {

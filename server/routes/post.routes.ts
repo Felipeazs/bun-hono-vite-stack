@@ -13,12 +13,21 @@ export const getPosts = createRoute({
 				"application/json": {
 					schema: z.object({
 						posts: z.array(getPostSchema),
+						status: z.boolean(),
 					}),
 				},
 			},
 		},
 		[HttpStatusCode.NOT_FOUND]: {
 			description: "Posts not found",
+			content: {
+				"application/json": {
+					schema: z.object({
+						posts: z.array(getPostSchema).optional(),
+						status: z.boolean(),
+					}),
+				},
+			},
 		},
 	},
 })
