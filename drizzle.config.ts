@@ -8,4 +8,4 @@ export default defineConfig({
 	dbCredentials: {
 		url: env.DATABASE_URI,
 	},
-} satisfies Config)
+} as Config)

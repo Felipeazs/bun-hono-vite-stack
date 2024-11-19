@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
 import { useState } from "react"
-import "./App.css"
 import reactLogo from "./assets/react.svg"
 import viteLogo from "/vite.svg"
 
@@ -22,8 +21,8 @@ function App() {
 	})
 
 	return (
-		<>
-			<div className="flex justify-center gap-10">
+		<div className="flex flex-col items-center justify-center gap-10 p-10">
+			<div className="flex gap-5">
 				<a
 					href="https://vite.dev"
 					target="_blank">
@@ -44,7 +43,7 @@ function App() {
 				</a>
 			</div>
 			<h1>Vite + React</h1>
-			<div className="card">
+			<div className="text-center">
 				{isFetching ? (
 					<p>API calling...</p>
 				) : (
@@ -57,7 +56,7 @@ function App() {
 				</Button>
 			</div>
 			<p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-		</>
+		</div>
 	)
 }
 
