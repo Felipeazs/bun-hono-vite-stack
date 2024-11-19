@@ -1,25 +1,10 @@
-import { useQuery } from "@tanstack/react-query"
-import { useState } from "react"
 import reactLogo from "./assets/react.svg"
 import viteLogo from "/vite.svg"
 
-import { getPosts } from "@/api"
-import { Button } from "./components/ui/button"
+import CreatePost from "./components/CreatePost"
+import Posts from "./components/Posts"
 
 function App() {
-	const [recall, setRecall] = useState<boolean>(true)
-
-	const { data: posts, isFetching } = useQuery({
-		queryKey: ["posts"],
-		queryFn: async () => {
-			const res = await getPosts()
-			setRecall(false)
-
-			return res
-		},
-		enabled: recall,
-	})
-
 	return (
 		<div className="flex flex-col items-center justify-center gap-10 p-10">
 			<div className="flex gap-5">
@@ -43,18 +28,7 @@ function App() {
 				</a>
 			</div>
 			<h1>Vite + React</h1>
-			<div className="text-center">
-				{isFetching ? (
-					<p>API calling...</p>
-				) : (
-					<p>Respuesta: {posts?.map((p) => <span key={p.id}>{p.post}</span>)}</p>
-				)}
-				<Button
-					variant="outline"
-					onClick={() => setRecall(true)}>
-					Recall
-				</Button>
-			</div>
+			<Posts />
 			<p className="read-the-docs">Click on the Vite and React logos to learn more</p>
 		</div>
 	)

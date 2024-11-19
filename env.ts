@@ -3,7 +3,7 @@ import { z, ZodError } from "zod"
 const EnvSchema = z.object({
 	NODE_ENV: z.string(),
 	PORT: z.coerce.number(),
-	LOG_LEVEL: z.string().default("info"),
+	LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace", "silent"]),
 	DATABASE_URI: z.string(),
 })
 
