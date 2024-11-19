@@ -12,8 +12,11 @@ const CreatePost = ({ refetch }: { refetch: () => void }) => {
 	const mutation = useMutation({
 		mutationKey: ["Create-post"],
 		mutationFn: createPost,
-		onSuccess: () => {
-			refetch()
+		onSuccess: (status) => {
+			if (status === 201) {
+				form.reset()
+				refetch()
+			}
 		},
 	})
 	const form = useForm({
@@ -22,10 +25,7 @@ const CreatePost = ({ refetch }: { refetch: () => void }) => {
 			post: "",
 		},
 		onSubmit: ({ value }) => {
-			console.log(value)
-
 			mutation.mutate(value)
-			form.reset()
 		},
 	})
 

@@ -8,7 +8,7 @@ export const getPosts = createRoute({
 	tags: ["Posts"],
 	responses: {
 		[HttpStatusCode.OK]: {
-			description: "Pago ok response",
+			description: "Get Posts",
 			content: {
 				"application/json": {
 					schema: z.object({
@@ -16,6 +16,9 @@ export const getPosts = createRoute({
 					}),
 				},
 			},
+		},
+		[HttpStatusCode.NOT_FOUND]: {
+			description: "Posts not found",
 		},
 	},
 })
@@ -37,6 +40,13 @@ export const createPost = createRoute({
 	responses: {
 		[HttpStatusCode.CREATED]: {
 			description: "Post sucessfuly created",
+			content: {
+				"application/json": {
+					schema: z.object({
+						status: z.number(),
+					}),
+				},
+			},
 		},
 	},
 })
