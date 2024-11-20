@@ -1,9 +1,14 @@
-import reactLogo from "./assets/react.svg"
+import reactLogo from "../assets/react.svg"
 import viteLogo from "/vite.svg"
 
-import Posts from "./components/Posts"
+import Posts from "../components/Posts"
+import { createFileRoute } from "@tanstack/react-router"
 
-function App() {
+export const Route = createFileRoute("/")({
+	component: Index,
+})
+
+function Index() {
 	return (
 		<div className="flex flex-col items-center justify-center gap-10 p-10">
 			<div className="flex gap-5">
@@ -31,4 +36,4 @@ function App() {
 	)
 }
 
-export default App
+export default Index

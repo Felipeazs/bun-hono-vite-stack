@@ -1,8 +1,9 @@
-import { defineConfig } from "vite"
-import path from "path"
-import react from "@vitejs/plugin-react-swc"
 import devServer from "@hono/vite-dev-server"
 import adapter from "@hono/vite-dev-server/bun"
+import react from "@vitejs/plugin-react-swc"
+import path from "path"
+import { defineConfig } from "vite"
+import { TanStackRouterVite } from "@tanstack/router-plugin/vite"
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -13,6 +14,10 @@ export default defineConfig({
 		outDir: "build",
 	},
 	plugins: [
+		TanStackRouterVite({
+			routesDirectory: "./client/routes",
+			generatedRouteTree: "./client/routeTree.gen.ts",
+		}),
 		react(),
 		devServer({
 			entry: "server/app.ts",
