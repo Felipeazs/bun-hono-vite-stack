@@ -1,10 +1,10 @@
 import reactLogo from "../assets/react.svg"
 import viteLogo from "/vite.svg"
 
-import Posts from "../components/Posts"
+import Posts from "@/client/components/Posts"
 import { createFileRoute } from "@tanstack/react-router"
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_layout/")({
 	component: Index,
 })
 
