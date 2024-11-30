@@ -52,7 +52,7 @@ export const createPost = createRoute({
 			content: {
 				"application/json": {
 					schema: z.object({
-						status: z.number(),
+						status: z.boolean(),
 					}),
 				},
 			},

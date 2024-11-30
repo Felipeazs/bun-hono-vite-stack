@@ -9,14 +9,14 @@ if (env.NODE_ENV !== "test") {
 	throw new Error("NODE_ENV must be 'test'")
 }
 
-describe("Post", () => {
+describe("Posts", () => {
 	const client = testClient(createApp().route("/", router))
 
 	it("Get posts", async () => {
 		const res = await client.posts.$get()
 		const json = await res.json()
 
-		expect(json.status).toBe(200)
+		expect(json.status).toBe(true)
 	})
 
 	const newpost = {
@@ -27,6 +27,6 @@ describe("Post", () => {
 		const res = await client.posts.$post({ json: newpost })
 		const json = await res.json()
 
-		expect(json.status).toBe(201)
+		expect(json.status).toBe(true)
 	})
 })

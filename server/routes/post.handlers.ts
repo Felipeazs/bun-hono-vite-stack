@@ -1,7 +1,7 @@
 import * as HttpStatusCode from "stoker/http-status-codes"
 
 import db from "../db"
-import { post } from "../db/schema"
+import { post as postTable } from "../db/schema"
 import { AppRouteHandler } from "../lib/types"
 import { TCreatePostRoute, TGetPostRoute } from "./post.routes"
 
@@ -19,7 +19,7 @@ export const getPosts: AppRouteHandler<TGetPostRoute> = async (c) => {
 export const createPost: AppRouteHandler<TCreatePostRoute> = async (c) => {
 	const body = c.req.valid("json")
 
-	await db.insert(post).values(body).returning()
+	await db.insert(postTable).values(body).returning()
 
-	return c.json({ status: HttpStatusCode.CREATED })
+	return c.json({ status: true }, HttpStatusCode.CREATED)
 }
