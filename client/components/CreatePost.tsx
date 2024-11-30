@@ -13,7 +13,7 @@ const CreatePost = ({ refetch }: { refetch: () => void }) => {
 		mutationKey: ["Create-post"],
 		mutationFn: createPost,
 		onSuccess: (status) => {
-			if (status === 201) {
+			if (status === true) {
 				form.reset()
 				refetch()
 			}
