@@ -11,9 +11,9 @@ export const getPosts: AppRouteHandler<TGetPostRoute> = async (c) => {
 	await new Promise((r) => setTimeout(r, 2000))
 
 	const posts = await db.query.post.findMany()
-	if (!posts) return c.json({ posts: null, status: HttpStatusCode.NOT_FOUND })
+	if (!posts) return c.json({ posts: undefined, status: false }, HttpStatusCode.NOT_FOUND)
 
-	return c.json({ posts, status: HttpStatusCode.OK })
+	return c.json({ posts, status: true }, HttpStatusCode.OK)
 }
 
 export const createPost: AppRouteHandler<TCreatePostRoute> = async (c) => {
