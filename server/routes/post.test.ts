@@ -34,6 +34,7 @@ describe("Posts", () => {
 	})
 
 	afterAll(async () => {
+		console.log("deleting data from db")
 		await db.delete(postTable).where(eq(postTable.post, "test 1"))
 	})
 })
