@@ -40,7 +40,7 @@ const Posts = () => {
 									<TableRow key={p.id}>
 										<TableCell>{p.id}</TableCell>
 										<TableCell>{p.post}</TableCell>
-										<TableCell>{p.createdAt?.substring(0, 10)}</TableCell>
+										<TableCell>{p.created_at?.substring(0, 10)}</TableCell>
 									</TableRow>
 								))
 							) : (

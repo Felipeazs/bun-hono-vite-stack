@@ -5,7 +5,7 @@ import { z } from "zod"
 export const post = pgTable("posts", {
 	id: serial().primaryKey(),
 	post: text("post").notNull(),
-	createdAt: timestamp({ mode: "date" }).default(new Date()),
+	created_at: timestamp("created_at", { mode: "date" }).default(new Date()),
 })
 
 export const getPostSchema = createSelectSchema(post)
@@ -17,7 +17,7 @@ export const insertPostSchema = createInsertSchema(post, {
 	})
 	.omit({
 		id: true,
-		createdAt: true,
+		created_at: true,
 	})
 
 export type TPost = z.infer<typeof insertPostSchema>
