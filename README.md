@@ -10,3 +10,4 @@ This template uses this packages:
     - Server Calls: Tanstack Query
     - Input validation: Zod
     - Styling: Shadcn + tailwindcss
+    - TODO: implement Auth (Clerk, Kinde, OAuth, etc...)
