@@ -15,13 +15,6 @@ if (env.NODE_ENV !== "test") {
 describe("Posts", () => {
 	const client = testClient(createApp().route("/", router))
 
-	it("Get posts", async () => {
-		const res = await client.posts.$get()
-		const json = await res.json()
-
-		expect(json.status).toBe(true)
-	})
-
 	const newpost = {
 		post: "test 1",
 	}
@@ -31,6 +24,19 @@ describe("Posts", () => {
 		const json = await res.json()
 
 		expect(json.status).toBe(true)
+	})
+
+	it("Get posts", async () => {
+		const res = await client.posts.$get()
+		const json = await res.json()
+
+		expect(json.status).toBe(true)
+
+		if (json?.posts!.length) {
+			expect(json.posts[0]).toHaveProperty("id")
+			expect(json.posts[0]).toHaveProperty("post")
+			expect(json.posts[0]).toHaveProperty("created_at")
+		}
 	})
 
 	afterAll(async () => {

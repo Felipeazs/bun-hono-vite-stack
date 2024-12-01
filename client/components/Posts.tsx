@@ -1,22 +1,20 @@
 import { getPosts } from "@/api"
-import { useQuery } from "@tanstack/react-query"
-import { useState } from "react"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import CreatePost from "./CreatePost"
 import { Button } from "./ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
 
 const Posts = () => {
-	const [recall, setRecall] = useState<boolean>(true)
+	const queryClient = useQueryClient()
 
-	const { data, isFetching, refetch } = useQuery({
-		queryKey: ["posts"],
+	const { data, isFetching } = useQuery({
+		queryKey: ["get-posts"],
 		queryFn: async () => {
 			const res = await getPosts()
-			setRecall(false)
 
 			return res
 		},
-		enabled: recall,
+		staleTime: Infinity,
 	})
 
 	return (
@@ -56,10 +54,12 @@ const Posts = () => {
 			)}
 			<Button
 				variant="outline"
-				onClick={() => setRecall(true)}>
+				onClick={async () =>
+					await queryClient.invalidateQueries({ queryKey: ["get-posts"] })
+				}>
 				Get Posts
 			</Button>
-			<CreatePost refetch={refetch} />
+			<CreatePost />
 		</div>
 	)
 }

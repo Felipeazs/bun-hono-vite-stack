@@ -3,19 +3,21 @@ import { zodValidator } from "@tanstack/zod-form-adapter"
 
 import { createPost } from "@/api"
 import { insertPostSchema } from "@/server/db/schema"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import FieldInfo from "./FieldInfo"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 
-const CreatePost = ({ refetch }: { refetch: () => void }) => {
+const CreatePost = () => {
+	const queryClient = useQueryClient()
+
 	const mutation = useMutation({
 		mutationKey: ["Create-post"],
 		mutationFn: createPost,
-		onSuccess: (status) => {
+		onSuccess: async (status) => {
 			if (status === true) {
 				form.reset()
-				refetch()
+				await queryClient.invalidateQueries({ queryKey: ["get-posts"] })
 			}
 		},
 	})
