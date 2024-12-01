@@ -4,6 +4,9 @@ This is a fullstack template that uses Hono + React (Vitejs) as front and backen
 
 This template uses this packages:
 
+    - Documentation: Scalar + openapi
     - Router: Tanstack Router
     - Forms: Tanstack Form
     - Server Calls: Tanstack Query
+    - Input validation: Zod
+    - Styling: Shadcn + tailwindcss
