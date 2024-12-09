@@ -20,9 +20,6 @@ export const createPost = async (post: TPost) => {
 	return await client.posts
 		.$post({ json: post })
 		.then((res) => res.json())
-		.then((data) => {
-			const { status } = data
-			return status
-		})
+		.then((data) => data)
 		.catch(console.error)
 }

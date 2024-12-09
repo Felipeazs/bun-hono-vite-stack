@@ -15,12 +15,12 @@ export default defineConfig({
 	},
 	plugins: [
 		TanStackRouterVite({
-			routesDirectory: "./client/routes",
-			generatedRouteTree: "./client/routeTree.gen.ts",
+			routesDirectory: "./src/routes",
+			generatedRouteTree: "./src/routeTree.gen.ts",
 		}),
 		react(),
 		devServer({
-			entry: "server/app.ts",
+			entry: "src/server/app.ts",
 			adapter,
 			exclude: [
 				/.*\.tsx?($|\?)/,
@@ -36,7 +36,7 @@ export default defineConfig({
 	],
 	resolve: {
 		alias: {
-			"@": path.resolve(__dirname, "./"),
+			"@": path.resolve(__dirname, "./src"),
 		},
 	},
 })
