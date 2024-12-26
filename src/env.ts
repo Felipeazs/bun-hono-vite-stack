@@ -7,6 +7,7 @@ const EnvSchema = z.object({
 		.enum(["fatal", "error", "warn", "info", "debug", "trace", "silent"])
 		.default("debug"),
 	DATABASE_URI: z.string(),
+    REDIS_URL: z.string(),
 	VITE_CLERK_PUBLISHABLE_KEY: z.string(),
 	CLERK_SECRET_KEY: z.string(),
 })
