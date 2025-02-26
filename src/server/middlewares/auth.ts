@@ -13,10 +13,6 @@ export const auth = createMiddleware(async (c, next) => {
 	const authState = await clerkClient.authenticateRequest(c.req.raw)
 	if (!authState.isSignedIn) throw new HTTPException(401, { message: "Unauthorized" })
 
-	const authed = authState.toAuth()
-
-	console.log(authed)
-
 	// const userDB = await db.query.user.findFirst({
 	// 	where: eq(user.externalId, authed.userId),
 	// })

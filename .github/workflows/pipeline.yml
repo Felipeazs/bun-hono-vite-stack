@@ -14,6 +14,9 @@ jobs:
             LOG_LEVEL: "debug"
             PORT: 4000
             DATABASE_URI: ${{secrets.DATABASE_URI}}
+            REDIS_URL: "redis_url"
+            VITE_CLERK_PUBLISHABLE_KEY: "publishable key"
+            CLERK_SECRET_KEY: "secret key"
         steps:
             - name: Checkout
               uses: actions/checkout@v4

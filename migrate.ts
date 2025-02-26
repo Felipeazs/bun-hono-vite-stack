@@ -5,5 +5,5 @@ import postgres from "postgres"
 import env from "@/env"
 
 const migrationClient = postgres(env.DATABASE_URI, { max: 1 })
-await migrate(drizzle(migrationClient), { migrationsFolder: "server/db/migrations" })
+await migrate(drizzle(migrationClient), { migrationsFolder: "src/server/db/migrations" })
 console.log("migration completed!")

@@ -20,13 +20,26 @@ export const getPosts = createRoute({
 				},
 			},
 		},
-		[HttpStatusCode.NOT_FOUND]: {
-			description: "Posts not found",
+	},
+})
+
+export const getPost = createRoute({
+	path: "/posts/{id}",
+	method: "get",
+	tags: ["Posts"],
+	middleware: auth,
+	request: {
+		params: z.object({
+			id: z.string(),
+		}),
+	},
+	responses: {
+		[HttpStatusCode.OK]: {
+			description: "Get Post by id",
 			content: {
 				"application/json": {
 					schema: z.object({
-						posts: z.array(getPostSchema).optional(),
-						status: z.boolean(),
+						post: getPostSchema,
 					}),
 				},
 			},
@@ -52,16 +65,36 @@ export const createPost = createRoute({
 	responses: {
 		[HttpStatusCode.CREATED]: {
 			description: "Post sucessfuly created",
-			content: {
-				"application/json": {
-					schema: z.object({
-						status: z.boolean(),
-					}),
-				},
-			},
 		},
 	},
 })
 
-export type TGetPostRoute = typeof getPosts
+export const updatePost = createRoute({
+	path: "/posts/{id}",
+	method: "put",
+	tags: ["Posts"],
+	middleware: auth,
+	request: {
+		params: z.object({
+			id: z.string(),
+		}),
+		body: {
+			description: "The body of the Post",
+			content: {
+				"application/json": {
+					schema: insertPostSchema,
+				},
+			},
+		},
+	},
+	responses: {
+		[HttpStatusCode.CREATED]: {
+			description: "Post sucessfuly updated",
+		},
+	},
+})
+
+export type TGetPostsRoute = typeof getPosts
+export type TGetPostRoute = typeof getPost
 export type TCreatePostRoute = typeof createPost
+export type TUpdatePostRoute = typeof updatePost

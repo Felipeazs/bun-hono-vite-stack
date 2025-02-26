@@ -1,13 +1,13 @@
 import { z, ZodError } from "zod"
 
 const EnvSchema = z.object({
-	NODE_ENV: z.string(),
+	NODE_ENV: z.string().default("development"),
 	PORT: z.coerce.number().default(4000),
 	LOG_LEVEL: z
 		.enum(["fatal", "error", "warn", "info", "debug", "trace", "silent"])
 		.default("debug"),
 	DATABASE_URI: z.string(),
-    REDIS_URL: z.string(),
+	REDIS_URL: z.string(),
 	VITE_CLERK_PUBLISHABLE_KEY: z.string(),
 	CLERK_SECRET_KEY: z.string(),
 })

@@ -10,13 +10,13 @@ export const Route = createFileRoute("/_authenticated")({
 
 function RouteComponent() {
 	return (
-		<>
+		<div className="w-full flex-1 flex flex-col gap-5 items-center justify-center">
 			<SignedOut>
 				<SignIn />
 			</SignedOut>
 			<SignedIn>
 				<Outlet />
 			</SignedIn>
-		</>
+		</div>
 	)
 }

@@ -28,11 +28,15 @@ function MainApp() {
 	return <RouterProvider router={router} />
 }
 
+const CLERK_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
 		<QueryClientProvider client={queryClient}>
 			<ClerkProvider
-				publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}
+				publishableKey={CLERK_KEY}
+				signUpFallbackRedirectUrl="/"
+				signInFallbackRedirectUrl="/"
 				afterSignOutUrl="/">
 				<MainApp />
 			</ClerkProvider>

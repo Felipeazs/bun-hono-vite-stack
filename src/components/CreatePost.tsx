@@ -14,11 +14,9 @@ const CreatePost = () => {
 	const mutation = useMutation({
 		mutationKey: ["Create-post"],
 		mutationFn: createPost,
-		onSuccess: async (res) => {
-			if (res?.status === true) {
-				form.reset()
-				await queryClient.invalidateQueries({ queryKey: ["get-posts"] })
-			}
+		onSuccess: async () => {
+			form.reset()
+			await queryClient.invalidateQueries({ queryKey: ["get-posts"] })
 		},
 	})
 	const form = useForm({

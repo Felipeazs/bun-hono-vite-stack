@@ -1,26 +1,19 @@
-import { getPosts } from "../api"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { Button } from "./ui/button"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
+import { Link } from "@tanstack/react-router"
 
+import { getPosts } from "../api"
 import CreatePost from "./CreatePost"
+import { Button, buttonVariants } from "./ui/button"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
 
 const Posts = () => {
 	const queryClient = useQueryClient()
 
 	const { data, isFetching } = useQuery({
 		queryKey: ["get-posts"],
-		queryFn: async () => {
-			const res = await getPosts()
-
-			return res
-		},
+		queryFn: getPosts,
 		staleTime: Infinity,
 	})
-
-	if (isFetching) {
-		return <p>Fetching posts...</p>
-	}
 
 	return (
 		<div className="flex flex-col gap-5">
@@ -32,6 +25,7 @@ const Posts = () => {
 							<TableHead>id</TableHead>
 							<TableHead>Posts</TableHead>
 							<TableHead>Created at</TableHead>
+							<TableHead></TableHead>
 						</TableRow>
 					</TableHeader>
 					<TableBody>
@@ -41,12 +35,22 @@ const Posts = () => {
 									<TableCell>{p.id}</TableCell>
 									<TableCell>{p.post}</TableCell>
 									<TableCell>{p.created_at?.substring(0, 10)}</TableCell>
+									<TableCell>
+										<Link
+											to={`/posts/${p.id}`}
+											className={buttonVariants({
+												size: "sm",
+												variant: "outline",
+											})}>
+											Editar
+										</Link>
+									</TableCell>
 								</TableRow>
 							))
 						) : (
 							<TableRow>
 								<TableCell>
-									<span> No Posts to show</span>
+									<span>No Posts to show</span>
 								</TableCell>
 							</TableRow>
 						)}
@@ -58,7 +62,7 @@ const Posts = () => {
 				onClick={async () =>
 					await queryClient.invalidateQueries({ queryKey: ["get-posts"] })
 				}>
-				Get Posts
+				{isFetching ? "Fetching posts..." : "Get posts"}
 			</Button>
 			<CreatePost />
 		</div>

@@ -1,4 +1,4 @@
-import { UserButton } from "@clerk/clerk-react"
+import Navbar from "@/components/Navbar"
 import { createFileRoute, Outlet } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/_authenticated/_layout")({
@@ -7,9 +7,9 @@ export const Route = createFileRoute("/_authenticated/_layout")({
 
 function RouteComponent() {
 	return (
-		<div className="w-full flex-1 flex flex-col items-center justify-center">
-			<UserButton />
+		<>
+			<Navbar />
 			<Outlet />
-		</div>
+		</>
 	)
 }

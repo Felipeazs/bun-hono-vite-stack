@@ -16,9 +16,26 @@ export const getPosts = async () => {
 		.catch(console.error)
 }
 
+export const getPost = async (id: string) => {
+	return await client.posts[":id"]
+		.$get({ param: { id } })
+		.then((res) => res.json())
+		.then((data) => data)
+		.catch(console.error)
+}
+
 export const createPost = async (post: TPost) => {
 	return await client.posts
 		.$post({ json: post })
+		.then((res) => res.json())
+		.then((data) => data)
+		.catch(console.error)
+}
+
+export const updatePost = async ({ post, id }: { post: string; id: string }) => {
+	console.log("update post", id, post)
+	return await client.posts[":id"]
+		.$put({ param: { id }, json: { post } })
 		.then((res) => res.json())
 		.then((data) => data)
 		.catch(console.error)

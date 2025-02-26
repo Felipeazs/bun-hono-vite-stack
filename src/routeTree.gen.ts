@@ -16,6 +16,7 @@ import { Route as AuthenticatedImport } from "./routes/_authenticated"
 import { Route as LayoutIndexImport } from "./routes/_layout.index"
 import { Route as AuthenticatedLayoutImport } from "./routes/_authenticated/_layout"
 import { Route as AuthenticatedLayoutPostsImport } from "./routes/_authenticated/_layout.posts"
+import { Route as AuthenticatedLayoutPostsIdImport } from "./routes/_authenticated/_layout.posts_.$id"
 
 // Create/Update Routes
 
@@ -43,6 +44,12 @@ const AuthenticatedLayoutRoute = AuthenticatedLayoutImport.update({
 const AuthenticatedLayoutPostsRoute = AuthenticatedLayoutPostsImport.update({
 	id: "/posts",
 	path: "/posts",
+	getParentRoute: () => AuthenticatedLayoutRoute,
+} as any)
+
+const AuthenticatedLayoutPostsIdRoute = AuthenticatedLayoutPostsIdImport.update({
+	id: "/posts_/$id",
+	path: "/posts/$id",
 	getParentRoute: () => AuthenticatedLayoutRoute,
 } as any)
 
@@ -85,6 +92,13 @@ declare module "@tanstack/react-router" {
 			preLoaderRoute: typeof AuthenticatedLayoutPostsImport
 			parentRoute: typeof AuthenticatedLayoutImport
 		}
+		"/_authenticated/_layout/posts_/$id": {
+			id: "/_authenticated/_layout/posts_/$id"
+			path: "/posts/$id"
+			fullPath: "/posts/$id"
+			preLoaderRoute: typeof AuthenticatedLayoutPostsIdImport
+			parentRoute: typeof AuthenticatedLayoutImport
+		}
 	}
 }
 
@@ -92,10 +106,12 @@ declare module "@tanstack/react-router" {
 
 interface AuthenticatedLayoutRouteChildren {
 	AuthenticatedLayoutPostsRoute: typeof AuthenticatedLayoutPostsRoute
+	AuthenticatedLayoutPostsIdRoute: typeof AuthenticatedLayoutPostsIdRoute
 }
 
 const AuthenticatedLayoutRouteChildren: AuthenticatedLayoutRouteChildren = {
 	AuthenticatedLayoutPostsRoute: AuthenticatedLayoutPostsRoute,
+	AuthenticatedLayoutPostsIdRoute: AuthenticatedLayoutPostsIdRoute,
 }
 
 const AuthenticatedLayoutRouteWithChildren = AuthenticatedLayoutRoute._addFileChildren(
@@ -128,12 +144,14 @@ export interface FileRoutesByFullPath {
 	"": typeof AuthenticatedLayoutRouteWithChildren
 	"/": typeof LayoutIndexRoute
 	"/posts": typeof AuthenticatedLayoutPostsRoute
+	"/posts/$id": typeof AuthenticatedLayoutPostsIdRoute
 }
 
 export interface FileRoutesByTo {
 	"": typeof AuthenticatedLayoutRouteWithChildren
 	"/": typeof LayoutIndexRoute
 	"/posts": typeof AuthenticatedLayoutPostsRoute
+	"/posts/$id": typeof AuthenticatedLayoutPostsIdRoute
 }
 
 export interface FileRoutesById {
@@ -143,13 +161,14 @@ export interface FileRoutesById {
 	"/_authenticated/_layout": typeof AuthenticatedLayoutRouteWithChildren
 	"/_layout/": typeof LayoutIndexRoute
 	"/_authenticated/_layout/posts": typeof AuthenticatedLayoutPostsRoute
+	"/_authenticated/_layout/posts_/$id": typeof AuthenticatedLayoutPostsIdRoute
 }
 
 export interface FileRouteTypes {
 	fileRoutesByFullPath: FileRoutesByFullPath
-	fullPaths: "" | "/" | "/posts"
+	fullPaths: "" | "/" | "/posts" | "/posts/$id"
 	fileRoutesByTo: FileRoutesByTo
-	to: "" | "/" | "/posts"
+	to: "" | "/" | "/posts" | "/posts/$id"
 	id:
 		| "__root__"
 		| "/_authenticated"
@@ -157,6 +176,7 @@ export interface FileRouteTypes {
 		| "/_authenticated/_layout"
 		| "/_layout/"
 		| "/_authenticated/_layout/posts"
+		| "/_authenticated/_layout/posts_/$id"
 	fileRoutesById: FileRoutesById
 }
 
@@ -200,7 +220,8 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/_layout.tsx",
       "parent": "/_authenticated",
       "children": [
-        "/_authenticated/_layout/posts"
+        "/_authenticated/_layout/posts",
+        "/_authenticated/_layout/posts_/$id"
       ]
     },
     "/_layout/": {
@@ -209,6 +230,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/_layout/posts": {
       "filePath": "_authenticated/_layout.posts.tsx",
+      "parent": "/_authenticated/_layout"
+    },
+    "/_authenticated/_layout/posts_/$id": {
+      "filePath": "_authenticated/_layout.posts_.$id.tsx",
       "parent": "/_authenticated/_layout"
     }
   }
