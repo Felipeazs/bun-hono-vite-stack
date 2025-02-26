@@ -19,7 +19,7 @@ export const getRedisCache = async ({ item, key }: { item: string; key: string }
 	return
 }
 
-export const setRedisCache = async <T,>({
+export const setRedisCache = async <T>({
 	item,
 	key,
 	value,

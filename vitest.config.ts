@@ -1,8 +1,9 @@
 import { loadEnv } from "vite"
 import { defineConfig } from "vitest/config"
-import path from "node:path"
+import tsconfigPaths from "vite-tsconfig-paths"
 
 export default defineConfig({
+	plugins: [tsconfigPaths()],
 	test: {
 		typecheck: {
 			enabled: true,
@@ -11,7 +12,7 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			"@": path.resolve(__dirname, "./"),
+			"@": new URL("./src/", import.meta.url).pathname,
 		},
 	},
 })
